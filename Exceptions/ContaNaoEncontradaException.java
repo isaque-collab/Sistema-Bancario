@@ -1,9 +1,9 @@
 package POO.Projetos.SistemaBancario.Exceptions;
 
-public class ContaNaoEncontradaException extends RuntimeException {
+public class ContaNaoEncontradaException extends Exception {
 
     public ContaNaoEncontradaException() {
-        super("Conta não encontrda");
+        super("Conta não encontrada");
     }
 
     public ContaNaoEncontradaException(String message) {
