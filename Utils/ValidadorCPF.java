@@ -19,7 +19,7 @@ public class ValidadorCPF {
         if (primeiroDigito != Character.getNumericValue(cpf.charAt(9))) return false;
 
         soma=0;
-        for (int i=0; i<9; i++ ){
+        for (int i=0; i<10; i++ ){
             soma += Character.getNumericValue(cpf.charAt(i))*(11-i);
         }
         int segundoDigito = 11 - (soma % 11);

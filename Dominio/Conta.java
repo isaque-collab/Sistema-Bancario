@@ -85,22 +85,6 @@ public abstract class Conta {
         return Collections.unmodifiableList(extrato);
     }
 
-    public void exibirExtrato(){
-        System.out.println("\n=========EXTRATO==========");
-        System.out.println("Titular: " + titular.getNome());
-        System.out.println("Conta: " + numeroDaConta);
-        System.out.println("---------------------------");
-        if (extrato.isEmpty()){
-            System.out.println("Nenhuma transação foi encontrada");
-        }else {
-            for (Transacao transacao : extrato){
-                System.out.println(transacao);
-            }
-        }
-        System.out.printf("---------------------\nSaldo atual: R$ %.2f%n", saldo);
-        System.out.println("========================");
-    }
-
     private void sacarInterno(double valor)throws SaldoInsuficienteException, ValorInvalidoException{
         if (valor<=0){
             throw new ValorInvalidoException("O valor do saque deve ser maior que 0");

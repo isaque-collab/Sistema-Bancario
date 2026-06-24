@@ -3,6 +3,7 @@ package POO.Projetos.SistemaBancario.Dominio;
 import POO.Projetos.SistemaBancario.Exceptions.CPFDuplicadoException;
 import POO.Projetos.SistemaBancario.Exceptions.ContaDuplicadaException;
 import POO.Projetos.SistemaBancario.Exceptions.ContaNaoEncontradaException;
+import POO.Projetos.SistemaBancario.Utils.Formatador;
 
 import java.util.HashMap;
 
@@ -29,7 +30,7 @@ public class Banco {
         }
 
         for (Conta c : contas.values()){
-            c.exibirInformacoes();
+            Formatador.exibirConta(c);
         }
     }
 

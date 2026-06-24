@@ -2,6 +2,7 @@ package POO.Projetos.SistemaBancario.Main;
 
 import POO.Projetos.SistemaBancario.Dominio.*;
 import POO.Projetos.SistemaBancario.Exceptions.*;
+import POO.Projetos.SistemaBancario.Utils.Formatador;
 
 import  java.util.Scanner;
 
@@ -12,16 +13,7 @@ public class Main {
         int opcao;
 
         do{
-            System.out.println("\n------------------BANCO-------------------------- ");
-            System.out.println("1 - Criar Conta Corrente");
-            System.out.println("2 - Criar Conta Poupança");
-            System.out.println("3 - Depositar");
-            System.out.println("4 - Sacar");
-            System.out.println("5 - Transferir");
-            System.out.println("6 - Ver Extrato");
-            System.out.println("0 - Sair");
-
-
+            Formatador.exibirMenu();
             System.out.print("Escolha uma opcao: ");
             opcao = lerInteiro(input);
 
@@ -149,11 +141,27 @@ public class Main {
                     int numeroConta = lerInteiro(input);
                     try{
                         Conta contaExtrato = banco.buscarConta(numeroConta);
-                        contaExtrato.exibirExtrato();
+                        Formatador.exibirExtrato(contaExtrato);
                     }catch (ContaNaoEncontradaException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
+
+                case 7:
+                    banco.listarContas();
+                    break;
+
+                 case 8:
+                     System.out.print("Digite o numero da conta: ");
+                     int numeroBusca = lerInteiro(input);
+
+                     try{
+                         Conta conta = banco.buscarConta(numeroBusca);
+                         Formatador.exibirConta(conta);
+                     }catch (ContaNaoEncontradaException e) {
+                         System.out.println(e.getMessage());
+                     }
+                     break;
 
 
                 case 0:
