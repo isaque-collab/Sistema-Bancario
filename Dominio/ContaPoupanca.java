@@ -1,10 +1,15 @@
 package POO.Projetos.SistemaBancario.Dominio;
 
+import POO.Projetos.SistemaBancario.Exceptions.ValorInvalidoException;
+
 public class ContaPoupanca extends Conta {
     private double taxaDeRendimento;
 
-    public ContaPoupanca(int numeroDaConta, Cliente titular, double saldo, double taxaDeRendimento) {
+    public ContaPoupanca(int numeroDaConta, Cliente titular, double saldo, double taxaDeRendimento) throws ValorInvalidoException {
         super(numeroDaConta, titular, saldo);
+        if (taxaDeRendimento<0){
+            throw new ValorInvalidoException("Taxa de rendimento não pode ser negativa");
+        }
         this.taxaDeRendimento = taxaDeRendimento;
     }
 

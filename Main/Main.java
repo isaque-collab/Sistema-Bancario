@@ -1,14 +1,12 @@
 package POO.Projetos.SistemaBancario.Main;
 
 import POO.Projetos.SistemaBancario.Dominio.*;
-import POO.Projetos.SistemaBancario.Exceptions.ContaNaoEncontradaException;
-import POO.Projetos.SistemaBancario.Exceptions.SaldoInsuficienteException;
-import POO.Projetos.SistemaBancario.Exceptions.ValorInvalidoException;
+import POO.Projetos.SistemaBancario.Exceptions.*;
 
 import  java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         Banco banco = new Banco();
         int opcao;
@@ -20,6 +18,7 @@ public class Main {
             System.out.println("3 - Depositar");
             System.out.println("4 - Sacar");
             System.out.println("5 - Transferir");
+            System.out.println("6 - Ver Extrato");
             System.out.println("0 - Sair");
 
 
@@ -28,53 +27,59 @@ public class Main {
 
             switch(opcao){
                 case 1:
-                    System.out.print("Digite o nome do titular: ");
-                    String titularCC = input.nextLine();
-                    System.out.print("Digite o CPF  do titular: ");
-                    String titularCPF = input.nextLine();
-                    System.out.print("Digite o e-mail do cliente: ");
-                    String emailCC = input.nextLine();
-                    System.out.print("Digite o número de telefone do titular: ");
-                    String telefoneCC = input.nextLine();
+                    try {
+                        System.out.print("Digite o nome do titular: ");
+                        String titularCC = input.nextLine();
+                        System.out.print("Digite o CPF  do titular: ");
+                        String titularCPF = input.nextLine();
+                        System.out.print("Digite o e-mail do cliente: ");
+                        String emailCC = input.nextLine();
+                        System.out.print("Digite o número de telefone do titular: ");
+                        String telefoneCC = input.nextLine();
 
-                    Cliente clienteCC = new Cliente(titularCC, titularCPF, emailCC, telefoneCC);
+                        Cliente clienteCC = new Cliente(titularCC, titularCPF, emailCC, telefoneCC);
 
-                    System.out.print("Digite o número da conta: ");
-                    int numeroCC = lerInteiro(input);
-                    System.out.print("Digite o saldo inicial da conta: ");
-                    double saldoCC = lerDouble(input);
-                    System.out.print("Limite da conta: ");
-                    double limiteCC = lerDouble(input);
+                        System.out.print("Digite o número da conta: ");
+                        int numeroCC = lerInteiro(input);
+                        System.out.print("Digite o saldo inicial da conta: ");
+                        double saldoCC = lerDouble(input);
+                        System.out.print("Limite da conta: ");
+                        double limiteCC = lerDouble(input);
 
-                    ContaCorrente cc = new ContaCorrente(numeroCC,clienteCC,saldoCC,limiteCC);
-
-                    banco.adicionarConta(cc);
-
-                    System.out.println("Conta adicionado com sucesso!");
+                        ContaCorrente contaCorrente = new ContaCorrente(numeroCC,clienteCC, saldoCC, limiteCC);
+                        banco.adicionarConta(contaCorrente);
+                        System.out.println("Conta adicionado com sucesso!");
+                    }catch (ClienteInvalidoException | ValorInvalidoException | ContaDuplicadaException | CPFDuplicadoException e){
+                        System.out.println("Erro ao criar a conta" + e.getMessage());
+                    }
                     break;
 
                 case 2:
-                    System.out.print("Digite o nome do titular: ");
-                    String titularCP = input.nextLine();
-                    System.out.print("Digite o CPF do titular: ");
-                    String titularCPF2 = input.nextLine();
-                    System.out.print("Digite o e-mail do titular: ");
-                    String emailCP = input.nextLine();
-                    System.out.print("Digite o número de telefone do titular: ");
-                    String telefoneCP = input.nextLine();
+                    try {
+                        System.out.print("Digite o nome do titular: ");
+                        String titularCP = input.nextLine();
+                        System.out.print("Digite o CPF do titular: ");
+                        String titularCPF2 = input.nextLine();
+                        System.out.print("Digite o e-mail do titular: ");
+                        String emailCP = input.nextLine();
+                        System.out.print("Digite o número de telefone do titular: ");
+                        String telefoneCP = input.nextLine();
 
-                    Cliente clienteCP = new Cliente(titularCP, titularCPF2, emailCP, telefoneCP);
+                        Cliente clienteCP = new Cliente(titularCP, titularCPF2, emailCP, telefoneCP);
 
-                    System.out.print("Digite o número da conta: ");
-                    int numeroCP = lerInteiro(input);
-                    System.out.print("Digite o saldo inicial da conta: ");
-                    double saldoCP = lerDouble(input);
-                    System.out.print("Taxa de Rendimento: ");
-                    double taxaCP = lerDouble(input);
+                        System.out.print("Digite o número da conta: ");
+                        int numeroCP = lerInteiro(input);
+                        System.out.print("Digite o saldo inicial da conta: ");
+                        double saldoCP = lerDouble(input);
+                        System.out.print("Taxa de Rendimento: ");
+                        double taxaCP = lerDouble(input);
 
-                    ContaPoupanca cp = new ContaPoupanca(numeroCP,clienteCP,saldoCP,taxaCP);
-                    banco.adicionarConta(cp);
-                    System.out.println("Conta adicionado com sucesso!");
+                        ContaPoupanca contaPoupanca = new ContaPoupanca(numeroCP,clienteCP, saldoCP, taxaCP);
+                        banco.adicionarConta(contaPoupanca);
+                        System.out.println("Conta adicionado com sucesso!");
+                    }catch (ClienteInvalidoException | ContaDuplicadaException | CPFDuplicadoException | ValorInvalidoException e){
+                        System.out.println("Erro ao criar a conta" + e.getMessage());
+                    }
                     break;
 
                 case 3:
@@ -138,6 +143,17 @@ public class Main {
                    }
 
                    break;
+
+                case 6:
+                    System.out.print("Digite o número da conta: ");
+                    int numeroConta = lerInteiro(input);
+                    try{
+                        Conta contaExtrato = banco.buscarConta(numeroConta);
+                        contaExtrato.exibirExtrato();
+                    }catch (ContaNaoEncontradaException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
 
 
                 case 0:

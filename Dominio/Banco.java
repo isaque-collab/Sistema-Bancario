@@ -1,32 +1,43 @@
 package POO.Projetos.SistemaBancario.Dominio;
 
+import POO.Projetos.SistemaBancario.Exceptions.CPFDuplicadoException;
+import POO.Projetos.SistemaBancario.Exceptions.ContaDuplicadaException;
 import POO.Projetos.SistemaBancario.Exceptions.ContaNaoEncontradaException;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Banco {
+    private HashMap<Integer, Conta> contas = new HashMap<>();
 
-   private ArrayList<Conta> contas = new ArrayList<>();
 
-
-    public void adicionarConta(Conta conta){
-        contas.add(conta);
+    public void adicionarConta(Conta conta) throws ContaDuplicadaException, CPFDuplicadoException {
+        if (contas.containsKey(conta.getNumeroDaConta())){
+            throw new ContaDuplicadaException();
+        }
+        for (Conta c : contas.values()){
+            if (c.getTitular().getCpf().equals(conta.getTitular().getCpf())){
+                throw new CPFDuplicadoException();
+            }
+        }
+        contas.put(conta.getNumeroDaConta(), conta);
     }
 
     public void listarContas(){
-        for(Conta conta : contas){
-            conta.exibirInformacoes();
+        if (contas.isEmpty()){
+            System.out.println("Nenhuma conta cadastrada");
+            return;
+        }
+
+        for (Conta c : contas.values()){
+            c.exibirInformacoes();
         }
     }
 
     public Conta buscarConta(int numeroDaConta) throws ContaNaoEncontradaException {
-
-        for(Conta conta : contas){
-
-            if(conta.getNumeroDaConta() == numeroDaConta){
-                return conta;
-            }
+        Conta conta = contas.get(numeroDaConta);
+        if (conta == null){
+            throw new ContaNaoEncontradaException();
         }
-        throw new ContaNaoEncontradaException("Conta não encontrada");
+        return conta;
     }
 }

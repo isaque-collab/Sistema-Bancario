@@ -6,9 +6,12 @@ import POO.Projetos.SistemaBancario.Exceptions.ValorInvalidoException;
 public class ContaCorrente extends Conta {
     private double limite;
 
-    public ContaCorrente(int numeroDaConta, Cliente titular, double saldo, double limite) {
+    public ContaCorrente(int numeroDaConta, Cliente titular, double saldo, double limite) throws ValorInvalidoException {
 
         super(numeroDaConta, titular, saldo);
+        if (limite<0){
+            throw new ValorInvalidoException("Limite não pode ser negativo");
+        }
         this.limite = limite;
 
     }
@@ -36,6 +39,8 @@ public class ContaCorrente extends Conta {
         }
 
         setSaldo(getSaldo() - valor);
+
+        registrarTransacao(new Transacao(TipoDeTransacao.SAQUE, valor, getSaldo()));
 
     }
 
