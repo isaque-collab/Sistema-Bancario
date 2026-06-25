@@ -3,13 +3,14 @@ package POO.Projetos.SistemaBancario.Main;
 import POO.Projetos.SistemaBancario.Dominio.*;
 import POO.Projetos.SistemaBancario.Exceptions.*;
 import POO.Projetos.SistemaBancario.Utils.Formatador;
+import POO.Projetos.SistemaBancario.Utils.PersistenciaService;
 
 import  java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
-        Banco banco = new Banco();
+        Banco banco = PersistenciaService.carregar();
         int opcao;
 
         do{
@@ -40,6 +41,7 @@ public class Main {
 
                         ContaCorrente contaCorrente = new ContaCorrente(numeroCC,clienteCC, saldoCC, limiteCC);
                         banco.adicionarConta(contaCorrente);
+                        PersistenciaService.salvar(banco);
                         System.out.println("Conta adicionado com sucesso!");
                     }catch (ClienteInvalidoException | ValorInvalidoException | ContaDuplicadaException | CPFDuplicadoException e){
                         System.out.println("Erro ao criar a conta" + e.getMessage());
@@ -68,6 +70,7 @@ public class Main {
 
                         ContaPoupanca contaPoupanca = new ContaPoupanca(numeroCP,clienteCP, saldoCP, taxaCP);
                         banco.adicionarConta(contaPoupanca);
+                        PersistenciaService.salvar(banco);
                         System.out.println("Conta adicionado com sucesso!");
                     }catch (ClienteInvalidoException | ContaDuplicadaException | CPFDuplicadoException | ValorInvalidoException e){
                         System.out.println("Erro ao criar a conta" + e.getMessage());
@@ -83,6 +86,7 @@ public class Main {
                     try{
                         Conta contaDeposito = banco.buscarConta(numeroDeposito);
                         contaDeposito.depositar(valorDeposito);
+                        PersistenciaService.salvar(banco);
                         System.out.println("Depósito realizado com sucesso!");
 
                     } catch (ValorInvalidoException | ContaNaoEncontradaException e) {
@@ -101,6 +105,7 @@ public class Main {
                     try{
                         Conta contaSaque = banco.buscarConta(numeroSaque);
                         contaSaque.sacar(valorSaque);
+                        PersistenciaService.salvar(banco);
                         System.out.println("Saque realizado com sucesso!");
 
                     } catch (SaldoInsuficienteException | ValorInvalidoException | ContaNaoEncontradaException e) {
@@ -127,6 +132,7 @@ public class Main {
                        Conta contaDestino = banco.buscarConta(numeroDestino);
 
                        contaOrigem.transferir(contaDestino, valorTransferir);
+                       PersistenciaService.salvar(banco);
                        System.out.println("Transferência realizada com sucesso");
                    } catch (SaldoInsuficienteException | ContaNaoEncontradaException | ValorInvalidoException e) {
                        System.out.println(e.getMessage());
@@ -165,7 +171,8 @@ public class Main {
 
 
                 case 0:
-                    System.out.println("Sistema encerrado!");
+                    PersistenciaService.salvar(banco);
+                    System.out.println("Dados salvos. Sistema Encerrado!");
 
                     break;
                 default:
