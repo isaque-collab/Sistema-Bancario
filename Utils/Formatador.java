@@ -1,4 +1,3 @@
-// Utils/Formatador.java
 package POO.Projetos.SistemaBancario.Utils;
 
 import POO.Projetos.SistemaBancario.Dominio.Conta;
