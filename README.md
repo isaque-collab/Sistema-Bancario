@@ -35,19 +35,15 @@ Este projeto foi desenvolvido como exercício prático de Programação Orientad
 - Validação de **número de conta único**
 - Listagem e busca de contas
 
+### Persistência
+- Dados salvos automaticamente em arquivo binário (`banco.dat`) após cada operação
+- Carregamento automático ao iniciar o sistema — contas e extratos são restaurados integralmente
+- Implementada via **serialização Java nativa** (`Serializable`), sem dependências externas
+
 ### Interface
 - Menu interativo no terminal
 - Formatação visual com bordas e alinhamento de colunas
 - Mensagens de erro amigáveis sem encerrar o programa
-
----
-
-## 🚧 Funcionalidades em Desenvolvimento
-
-### Persistência em Arquivo
-- Salvar e carregar contas automaticamente ao iniciar/encerrar o sistema
-- Formato de arquivo incluindo tipo da conta (`CC` ou `CP`) para instanciar a subclasse correta na leitura
-- Persistência do extrato de cada conta
 
 ---
 
@@ -63,18 +59,19 @@ SistemaBancario/
 │   ├── Cliente.java
 │   ├── Transacao.java
 │   └── TipoDeTransacao.java    (enum)
-├── Exceções/
+├── Exceptions/
 │   ├── ClienteInvalidoException.java
 │   ├── ContaDuplicadaException.java
 │   ├── ContaNaoEncontradaException.java
 │   ├── CPFDuplicadoException.java
 │   ├── SaldoInsuficienteException.java
 │   └── ValorInvalidoException.java
-├── Utilitários/
+├── Utils/
 │   ├── Formatador.java
+│   ├── PersistenciaService.java
 │   ├── ValidadorCPF.java
 │   └── ValidadorEmail.java
-└── Principal/
+└── Main/
     └── Main.java
 ```
 
@@ -91,11 +88,10 @@ Cliente               → titular da conta
 Transacao             → registro de cada operação
 TipoDeTransacao       → enum: DEPOSITO, SAQUE, TRANSFERENCIA_ENVIADA, TRANSFERENCIA_RECEBIDA
 Banco                 → HashMap<Integer, Conta>
+PersistenciaService   → salvar/carregar Banco via serialização
 ```
 
 ---
-
-
 
 ## 🛠️ Conceitos Aplicados
 
@@ -108,7 +104,18 @@ Banco                 → HashMap<Integer, Conta>
 | Exceções verificadas | Todas as exceções de negócio estendem `Exception` |
 | Coleções | `HashMap` para contas, `ArrayList` para extrato |
 | Enum | `TipoDeTransacao` |
-| Classe utilitária | `ValidadorCPF`, `ValidadorEmail`, `Formatador` |
+| Serialização | Persistência via `ObjectOutputStream` / `ObjectInputStream` |
+| Classe utilitária | `ValidadorCPF`, `ValidadorEmail`, `Formatador`, `PersistenciaService` |
+
+---
+
+## ⚙️ Como Executar
+
+1. Clone o repositório
+2. Abra o projeto no IntelliJ IDEA
+3. Adicione `-Dfile.encoding=UTF-8` nas VM options para exibir corretamente os caracteres do menu no Windows
+4. Execute `Main.java`
+5. O arquivo `banco.dat` será criado automaticamente na raiz do projeto na primeira operação
 
 ---
 
