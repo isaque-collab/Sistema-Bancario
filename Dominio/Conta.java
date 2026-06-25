@@ -14,9 +14,7 @@ public abstract class Conta implements Serializable {
     private Cliente titular;
     private double saldo;
     private List<Transacao> extrato = new ArrayList<>();
-    {
-        System.out.println("Nova Conta Criada");
-    }
+
     public Conta(int numeroDaConta, Cliente titular, double saldo) throws ValorInvalidoException {
         if (saldo<0){
             throw new ValorInvalidoException("Saldo inicial não pode ser negativo");
