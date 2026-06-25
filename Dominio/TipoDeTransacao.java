@@ -1,6 +1,8 @@
 package POO.Projetos.SistemaBancario.Dominio;
 
-public enum TipoDeTransacao {
+import java.io.Serializable;
+
+public enum TipoDeTransacao implements Serializable {
     DEPOSITO,
     SAQUE,
     TRANSFERENCIA_ENVIADA,

@@ -1,9 +1,11 @@
 package POO.Projetos.SistemaBancario.Dominio;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Transacao {
+public class Transacao implements Serializable {
+    private static final long serialVersionUID = 5L;
     private final TipoDeTransacao tipo;
     private final double valor;
     private final LocalDateTime dataHora;

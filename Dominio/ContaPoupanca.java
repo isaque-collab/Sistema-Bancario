@@ -2,7 +2,10 @@ package POO.Projetos.SistemaBancario.Dominio;
 
 import POO.Projetos.SistemaBancario.Exceptions.ValorInvalidoException;
 
-public class ContaPoupanca extends Conta {
+import java.io.Serializable;
+
+public class ContaPoupanca extends Conta implements Serializable {
+    private static final long serialVersionUID = 3L;
     private double taxaDeRendimento;
 
     public ContaPoupanca(int numeroDaConta, Cliente titular, double saldo, double taxaDeRendimento) throws ValorInvalidoException {

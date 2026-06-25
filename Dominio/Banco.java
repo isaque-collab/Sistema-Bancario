@@ -5,9 +5,11 @@ import POO.Projetos.SistemaBancario.Exceptions.ContaDuplicadaException;
 import POO.Projetos.SistemaBancario.Exceptions.ContaNaoEncontradaException;
 import POO.Projetos.SistemaBancario.Utils.Formatador;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Banco {
+public class Banco implements Serializable {
+    private static final long serialVersionUID = 6L;
     private HashMap<Integer, Conta> contas = new HashMap<>();
 
 

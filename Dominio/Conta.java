@@ -2,11 +2,14 @@ package POO.Projetos.SistemaBancario.Dominio;
 
 import POO.Projetos.SistemaBancario.Exceptions.SaldoInsuficienteException;
 import POO.Projetos.SistemaBancario.Exceptions.ValorInvalidoException;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class Conta {
+public abstract class Conta implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int numeroDaConta;
     private Cliente titular;
     private double saldo;

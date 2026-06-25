@@ -4,7 +4,10 @@ import POO.Projetos.SistemaBancario.Exceptions.ClienteInvalidoException;
 import POO.Projetos.SistemaBancario.Utils.ValidadorCPF;
 import POO.Projetos.SistemaBancario.Utils.ValidadorEmail;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
+    private static final long serialVersionUID = 4L;
     private String nome;
     private String cpf;
     private String email;

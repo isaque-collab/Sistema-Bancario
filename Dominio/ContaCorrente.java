@@ -3,7 +3,10 @@ package POO.Projetos.SistemaBancario.Dominio;
 import POO.Projetos.SistemaBancario.Exceptions.SaldoInsuficienteException;
 import POO.Projetos.SistemaBancario.Exceptions.ValorInvalidoException;
 
-public class ContaCorrente extends Conta {
+import java.io.Serializable;
+
+public class ContaCorrente extends Conta implements Serializable {
+    private static final long serialVersionUID = 2L;
     private double limite;
 
     public ContaCorrente(int numeroDaConta, Cliente titular, double saldo, double limite) throws ValorInvalidoException {
