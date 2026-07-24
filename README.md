@@ -1,16 +1,16 @@
-# 🏦 Sistema Bancário
+# Sistema Bancário
 
 Sistema bancário orientado a objetos desenvolvido em Java, com foco em boas práticas de POO, tratamento de exceções, validações de domínio e persistência de dados.
 
 ---
 
-## 📌 Sobre o Projeto
+##  Sobre o Projeto
 
 Este projeto foi desenvolvido como exercício prático de Programação Orientada a Objetos em Java. O objetivo é simular as operações básicas de um sistema bancário real, cobrindo desde a modelagem do domínio até a persistência de dados em arquivo.
 
 ---
 
-## ✅ Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
 ### Contas
 - Criação de **Conta Corrente** com limite de crédito
@@ -47,7 +47,7 @@ Este projeto foi desenvolvido como exercício prático de Programação Orientad
 
 ---
 
-## 🗂️ Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 SistemaBancario/
@@ -77,7 +77,7 @@ SistemaBancario/
 
 ---
 
-## 🧱 Modelagem
+## Modelagem
 
 ```
 Conta (abstrata)
@@ -93,7 +93,7 @@ PersistenciaService   → salvar/carregar Banco via serialização
 
 ---
 
-## 🛠️ Conceitos Aplicados
+## Conceitos Aplicados
 
 | Conceito | Aplicação |
 |---|---|
@@ -109,7 +109,7 @@ PersistenciaService   → salvar/carregar Banco via serialização
 
 ---
 
-## ⚙️ Como Executar
+## Como Executar
 
 1. Clone o repositório
 2. Abra o projeto no IntelliJ IDEA
